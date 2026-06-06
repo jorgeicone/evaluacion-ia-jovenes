@@ -74,6 +74,8 @@ th{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.5p
   <div class="top">
     <div class="brand"><div class="logo">IA</div><div><b>Panel · Evaluación del Entrenamiento</b><small>IA para Jóvenes Emprendedores · U. Libre Cúcuta</small></div></div>
     <div id="actions" style="display:none">
+      <a class="btn ghost" href="../resultados/" target="_blank" rel="noopener" title="Dashboard público para compartir resultados">📊 Dashboard público</a>
+      <button class="btn ghost" id="sharelink">🔗 Copiar enlace público</button>
       <button class="btn ghost" id="csv">⬇ Exportar CSV</button>
       <button class="btn" id="reload">🔄 Actualizar</button>
     </div>
@@ -173,6 +175,7 @@ async function loadWithPass(pw){
 }
 $("reload").onclick=()=>loadWithPass(localStorage.getItem("panel_eval_pw")||"");
 $("csv").onclick=exportCSV;
+$("sharelink").onclick=()=>{const u=new URL("../resultados/",location.href).href;navigator.clipboard.writeText(u).then(()=>{$("sharelink").textContent="✓ Copiado";setTimeout(()=>$("sharelink").textContent="🔗 Copiar enlace público",1600);});};
 
 async function delRow(id){
   if(!confirm("¿Borrar esta evaluación? Esta acción no se puede deshacer.")) return;
@@ -304,10 +307,4 @@ function resumen(n,satPct,nps,recPct,docAvg){
 function esc(s){return String(s).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));}
 function exportCSV(){
   const head=["nombre","emprendimiento","satisfaccion_pct","r_satisfaccion","r_docente","r_contenido","r_organizacion","r_practica","r_aplicabilidad","r_expectativas","r_confianza","nps","avance_label","llevas","valioso","aplicar","testimonio","autoriza","fecha"];
-  const rows=DATA.map(d=>[d.nombre,d.emprendimiento,d.satisfaccion_pct,d.r_satisfaccion,d.r_docente,d.r_contenido,d.r_organizacion,d.r_practica,d.r_aplicabilidad,d.r_expectativas,d.r_confianza,d.nps,d.avance_label,(Array.isArray(d.llevas)?d.llevas.join(" | "):""),d.valioso,d.aplicar,d.testimonio,d.autoriza,d.created_at].map(v=>`"${(v??"").toString().replace(/"/g,'""')}"`).join(","));
-  const csv=[head.join(","),...rows].join("\n");
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"}));a.download="evaluacion-entrenamiento-ia-jovenes.csv";a.click();
-}
-</script>
-</body>
-</html>
+  const rows=DATA.map(d=>[d.nombre,d.emprendimiento,d.satisfaccion_pct,d.r_satisfaccion,d.r_docente,d.r_contenido,d.r_organizacion,d.r_practica,d.r_aplica
