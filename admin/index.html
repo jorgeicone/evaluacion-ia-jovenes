@@ -14,7 +14,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .brand{display:flex;align-items:center;gap:12px}
 .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#03101f;box-shadow:0 0 24px rgba(0,212,255,.4)}
 .brand b{font-weight:800}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
-.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#03101f;font-weight:700;border:none;border-radius:10px;padding:11px 18px;cursor:pointer;font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#03101f;font-weight:700;border:none;border-radius:10px;padding:11px 18px;cursor:pointer;font-size:14px;text-decoration:none}
 .btn.ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}
 .btn:hover{filter:brightness(1.08)}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:18px}
@@ -307,4 +307,10 @@ function resumen(n,satPct,nps,recPct,docAvg){
 function esc(s){return String(s).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));}
 function exportCSV(){
   const head=["nombre","emprendimiento","satisfaccion_pct","r_satisfaccion","r_docente","r_contenido","r_organizacion","r_practica","r_aplicabilidad","r_expectativas","r_confianza","nps","avance_label","llevas","valioso","aplicar","testimonio","autoriza","fecha"];
-  const rows=DATA.map(d=>[d.nombre,d.emprendimiento,d.satisfaccion_pct,d.r_satisfaccion,d.r_docente,d.r_contenido,d.r_organizacion,d.r_practica,d.r_aplica
+  const rows=DATA.map(d=>[d.nombre,d.emprendimiento,d.satisfaccion_pct,d.r_satisfaccion,d.r_docente,d.r_contenido,d.r_organizacion,d.r_practica,d.r_aplicabilidad,d.r_expectativas,d.r_confianza,d.nps,d.avance_label,(Array.isArray(d.llevas)?d.llevas.join(" | "):""),d.valioso,d.aplicar,d.testimonio,d.autoriza,d.created_at].map(v=>`"${(v??"").toString().replace(/"/g,'""')}"`).join(","));
+  const csv=[head.join(","),...rows].join("\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"}));a.download="evaluacion-entrenamiento-ia-jovenes.csv";a.click();
+}
+</script>
+</body>
+</html>
