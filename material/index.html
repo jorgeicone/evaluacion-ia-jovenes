@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material de Estudio · IA para Jóvenes Emprendedores</title>
+<meta name="description" content="Material de estudio del entrenamiento de Inteligencia Artificial para Jóvenes Emprendedores (Universidad Libre Cúcuta, Jorge Hugo Pérez): guías paso a paso, prompts listos y retos por cada tema visto.">
+<meta name="theme-color" content="#050d1f">
+<meta property="og:title" content="Material de Estudio · IA para Jóvenes Emprendedores">
+<meta property="og:description" content="Guías, prompts y retos de los 8 temas del entrenamiento, ordenados según lo que los participantes se llevaron montado.">
+<style>
+:root{
+  --bg:#050d1f; --surface:rgba(9,22,40,0.92); --surface2:#0d1e35; --surface3:#122540;
+  --border:rgba(22,46,74,0.8); --border2:#1e3d5e;
+  --accent:#00d4ff; --accent2:#7b2fff; --accent3:#10b981; --orange:#ff8c00;
+  --gold:#f59e0b; --pink:#ec4899; --danger:#ef4444;
+  --text:#e2e8f0; --text-muted:#7a93b4; --text-dim:#3d5272;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;position:relative;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:28px 18px 80px}
+.brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px}
+.brand .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#03101f;box-shadow:0 0 24px rgba(0,212,255,.45)}
+.brand .bt{font-weight:800;letter-spacing:.5px}
+.brand .bs{font-size:11px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border2);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:7px 16px;border-radius:999px}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);box-shadow:0 0 10px var(--accent3)}
+.center{text-align:center}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:26px;backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(0,0,0,.4);margin-bottom:18px}
+h1{font-size:34px;font-weight:800;line-height:1.15;margin:16px 0 8px}
+.lead{color:var(--text-muted);font-size:15px;max-width:680px;margin:0 auto}
+.sec-title{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;margin:0 0 16px}
+.muted{color:var(--text-muted)}
+/* hero kpis */
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:24px 0 4px}
+.hk{background:linear-gradient(160deg,var(--surface2),var(--surface3));border:1px solid var(--border2);border-radius:18px;padding:20px 14px;text-align:center}
+.hk b{display:block;font-size:36px;font-weight:800;line-height:1}
+.hk span{display:block;font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-top:7px}
+/* nav chips */
+.navchips{position:sticky;top:0;z-index:5;background:rgba(5,13,31,.92);backdrop-filter:blur(10px);padding:10px 4px;margin:0 -4px 18px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
+.navchips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;background:var(--surface2);border:1px solid var(--border2);color:var(--text-muted);font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;text-decoration:none;transition:.2s;white-space:nowrap}
+.chip:hover{color:var(--accent);border-color:var(--accent)}
+/* team table */
+.team{display:grid;gap:10px}
+.tm{display:flex;gap:14px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border2);border-radius:14px;padding:14px 16px}
+.tm .ic{font-size:22px;line-height:1.2}
+.tm b{display:block;font-size:14.5px}
+.tm small{color:var(--text-muted);font-size:13px;line-height:1.5;display:block}
+.tm a{color:var(--accent);text-decoration:none;font-weight:700;font-size:12.5px}
+.tm a:hover{text-decoration:underline}
+/* modules */
+.mod{scroll-margin-top:70px}
+.mod-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.mod-num{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;color:#03101f;flex-shrink:0}
+.mod-title{flex:1;min-width:200px}
+.mod-title h2{font-size:21px;font-weight:800;line-height:1.25}
+.mod-title .sub{font-size:13px;color:var(--text-muted);margin-top:3px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:999px;letter-spacing:.4px}
+.badge.hot{background:rgba(16,185,129,.12);color:var(--accent3);border:1px solid rgba(16,185,129,.4)}
+.badge.warm{background:rgba(245,158,11,.12);color:var(--gold);border:1px solid rgba(245,158,11,.4)}
+.badge.cold{background:rgba(255,140,0,.12);color:var(--orange);border:1px solid rgba(255,140,0,.45)}
+.mod-bar{height:8px;background:var(--surface3);border-radius:999px;overflow:hidden;margin:12px 0 4px}
+.mod-fill{height:100%;border-radius:999px;width:0;transition:width 1s cubic-bezier(.16,1,.3,1)}
+.mod-bar-lab{font-size:12px;color:var(--text-dim);margin-bottom:14px}
+.blk{margin-top:18px}
+.blk h3{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.steps{display:grid;gap:8px;counter-reset:st}
+.step{display:flex;gap:12px;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;font-size:14px}
+.step::before{counter-increment:st;content:counter(st);flex-shrink:0;width:24px;height:24px;border-radius:8px;background:var(--surface3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--accent)}
+.prompt{position:relative;background:#091628;border:1px solid var(--border2);border-left:3px solid var(--accent);border-radius:12px;padding:16px 16px 16px 18px;margin-bottom:10px}
+.prompt p{font-size:13.5px;color:var(--text);white-space:pre-wrap;font-family:Consolas,'Cascadia Mono',monospace;line-height:1.55}
+.prompt .plabel{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:8px}
+.copy{position:absolute;top:10px;right:10px;background:var(--surface3);border:1px solid var(--border2);color:var(--text-muted);font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:8px;cursor:pointer;transition:.15s}
+.copy:hover{color:var(--accent);border-color:var(--accent)}
+.copy:active{transform:scale(.97)}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tool{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border2);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--text);text-decoration:none;transition:.2s}
+.tool:hover{border-color:var(--accent);color:var(--accent)}
+.tool small{color:var(--text-dim);font-weight:400;font-size:11px}
+.reto{background:linear-gradient(160deg,rgba(123,47,255,.12),rgba(0,212,255,.07));border:1px solid rgba(123,47,255,.4);border-radius:14px;padding:16px 18px;font-size:14px;margin-top:18px}
+.reto b{color:var(--accent)}
+.keys{display:grid;gap:8px}
+.key{display:flex;gap:10px;font-size:14px;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:11px 14px}
+.key::before{content:"✦";color:var(--accent);font-weight:800;flex-shrink:0}
+/* formula */
+.formula{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.fpart{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;font-size:13px;flex:1;min-width:140px}
+.fpart b{display:block;font-size:13.5px;margin-bottom:2px}
+.fpart small{color:var(--text-muted);font-size:12px;line-height:1.45;display:block}
+.fplus{align-self:center;color:var(--text-dim);font-weight:800}
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:none}
+.foot{text-align:center;color:var(--text-dim);font-size:12px;margin-top:30px;line-height:1.7}
+.foot a{color:var(--text-muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(120deg,var(--accent),var(--accent2));color:#03101f;font-weight:800;font-size:15px;border:none;border-radius:12px;padding:13px 22px;cursor:pointer;transition:.2s;box-shadow:0 8px 26px rgba(0,212,255,.3);text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border2);box-shadow:none}
+@media print{#stars,.navchips,.share{display:none}body{background:#fff;color:#000}.card{box-shadow:none;border:1px solid #ccc}}
+@media(max-width:560px){h1{font-size:26px}.hk b{font-size:30px}.mod-title h2{font-size:18px}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .mod-fill{transition:none}
+  *{animation:none!important}
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="wrap">
+
+  <div class="brand">
+    <div class="logo">IA</div>
+    <div><div class="bt">IA para Jóvenes Emprendedores</div><div class="bs">Material de estudio · U. Libre Cúcuta</div></div>
+  </div>
+
+  <div class="card center">
+    <span class="pill"><span class="dot"></span> Tu kit para seguir solo después del curso</span>
+    <h1>El material de estudio de tu <span style="color:var(--accent)">equipo de IAs</span></h1>
+    <p class="lead">Este material acompaña el entrenamiento dictado por <b>Jorge Hugo Pérez</b> en la Universidad Libre de Cúcuta. Los 8 temas están ordenados según lo que <b>ustedes mismos dijeron en la evaluación</b> que se llevaron montado. Los de abajo son los que más conviene repasar.</p>
+    <div class="hero">
+      <div class="hk"><b style="color:var(--accent)" class="cnt" data-n="135">0</b><span>Participantes evaluaron</span></div>
+      <div class="hk"><b style="color:var(--accent3)"><span class="cnt" data-n="93">0</span>%</b><span>Satisfacción global</span></div>
+      <div class="hk"><b style="color:var(--gold)" class="cnt" data-n="8">0</b><span>Temas de estudio</span></div>
+      <div class="hk"><b style="color:var(--accent2)" class="cnt" data-n="16">0</b><span>Prompts listos para copiar</span></div>
+    </div>
+  </div>
+
+  <nav class="navchips">
+    <a class="chip" href="#equipo">🧠 Tu equipo de IA</a>
+    <a class="chip" href="#prompting">🔑 Fórmula de prompts</a>
+    <a class="chip" href="#m1">1 · Pitch 60s</a>
+    <a class="chip" href="#m2">2 · Investigación</a>
+    <a class="chip" href="#m3">3 · Google + Gemini</a>
+    <a class="chip" href="#m4">4 · Marca</a>
+    <a class="chip" href="#m5">5 · Canvas</a>
+    <a class="chip" href="#m6">6 · Ruta 30 días</a>
+    <a class="chip" href="#m7">7 · Automatización</a>
+    <a class="chip" href="#m8">8 · Contenido</a>
+  </nav>
+
+  <!-- EQUIPO -->
+  <div class="card rv mod" id="equipo">
+    <div class="sec-title">🧠 Antes de estudiar: recuerda quién es quién en tu equipo</div>
+    <p class="muted" style="font-size:14px;margin-bottom:14px">La gran idea del curso: <b style="color:var(--text)">no aprendiste una IA, aprendiste a dirigir un equipo de IAs</b>. Cada herramienta es un empleado con su especialidad. Ninguna gana sola: la magia está en combinarlas.</p>
+    <div class="team">
+      <div class="tm"><div class="ic">🔎</div><div><b>Investigador · Perplexity + Comet</b><small>Investiga mercado, competencia y tendencias con fuentes citadas. Comet navega y actúa por ti.</small><a href="https://www.perplexity.ai" target="_blank" rel="noopener">perplexity.ai →</a></div></div>
+      <div class="tm"><div class="ic">🧩</div><div><b>Estratega · Claude</b><small>Piensa el negocio y entrega trabajo terminado: Word, Excel, PowerPoint y diseños listos para usar.</small><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai →</a></div></div>
+      <div class="tm"><div class="ic">🌐</div><div><b>Ecosistema de trabajo · Google + Gemini</b><small>Gemini en Docs, Sheets y Gmail; AI Studio (probar IA sin código) y NotebookLM (tu cerebro de documentos).</small><a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com →</a></div></div>
+      <div class="tm"><div class="ic">🚀</div><div><b>Especialista de entrega · GLM</b><small>Apoyo potente y económico para piezas completas: páginas, documentos y código de punta a punta.</small><a href="https://chat.z.ai" target="_blank" rel="noopener">chat.z.ai →</a></div></div>
+      <div class="tm"><div class="ic">⚡</div><div><b>Voz fresca y tiempo real · Grok</b><small>Segunda opinión, tono desenfadado e información al minuto (tendencias, redes).</small><a href="https://grok.com" target="_blank" rel="noopener">grok.com →</a></div></div>
+      <div class="tm"><div class="ic">🎨</div><div><b>Diseñador de imágenes · ChatGPT</b><small>Logos, piezas visuales, mockups y branding visual en minutos.</small><a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com →</a></div></div>
+    </div>
+  </div>
+
+  <!-- PROMPTING -->
+  <div class="card rv mod" id="prompting">
+    <div class="sec-title">🔑 La llave de todo: la fórmula de prompting estratégico</div>
+    <p class="muted" style="font-size:14px">Todos los prompts de este material usan la misma fórmula del curso. Apréndetela y podrás crear los tuyos:</p>
+    <div class="formula">
+      <div class="fpart"><b style="color:var(--accent)">Rol</b><small>Quién quieres que sea la IA: "Actúa como consultor de emprendimiento…"</small></div>
+      <span class="fplus">+</span>
+      <div class="fpart"><b style="color:var(--accent2)">Contexto</b><small>Tu situación real: negocio, ciudad, presupuesto, tiempo.</small></div>
+      <span class="fplus">+</span>
+      <div class="fpart"><b style="color:var(--accent3)">Tarea</b><small>Qué quieres exactamente que haga.</small></div>
+      <span class="fplus">+</span>
+      <div class="fpart"><b style="color:var(--orange)">Formato</b><small>Cómo quieres la respuesta: tabla, lista, documento, guion.</small></div>
+      <span class="fplus">+</span>
+      <div class="fpart"><b style="color:var(--pink)">Restricciones</b><small>Límites: longitud, tono, qué evitar.</small></div>
+    </div>
+    <div class="prompt"><div class="plabel">Ejemplo del curso (antes vs. después)</div><p>❌ "Dame ideas de negocio."
+
+✅ "Actúa como consultor de emprendimiento en Cúcuta. Tengo $2.000.000, 4 horas al día y sé de [tu habilidad]. Dame 5 ideas validables en 30 días, con el primer cliente posible y el riesgo principal de cada una. Preséntalo en una tabla."</p><button class="copy">Copiar</button></div>
+  </div>
+
+  <!-- M1 PITCH -->
+  <div class="card rv mod" id="m1">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--accent),var(--accent2))">1</div>
+      <div class="mod-title"><h2>Tu pitch de 60 segundos</h2><div class="sub">Sesión 2 · Taller final + Demo Day</div></div>
+      <span class="badge hot">✓ 56% lo dejó montado</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="56" style="background:linear-gradient(90deg,rgba(0,212,255,.6),var(--accent))"></div></div>
+    <div class="mod-bar-lab">75 de 135 participantes salieron con su pitch listo. Si eres uno de ellos, úsalo esta semana. Si no, este es el módulo más rápido de recuperar.</div>
+    <div class="blk"><h3 style="color:var(--accent)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">Un pitch de 60 segundos tiene 4 partes: el problema, tu solución, tu cliente ideal y qué te hace diferente (en este curso: qué IAs trabajan para tu negocio).</div>
+        <div class="key">No se memoriza palabra por palabra: se memorizan las 4 ideas y se practica en voz alta.</div>
+        <div class="key">La IA es tu entrenador: te lo escribe, te lo puntúa y te lo mejora las veces que quieras.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Abre Claude o Gemini y usa el prompt de abajo con los datos reales de tu negocio.</div>
+        <div class="step">Lee el resultado en voz alta y cronométralo: debe durar entre 50 y 70 segundos.</div>
+        <div class="step">Pídele a la IA que lo puntúe de 1 a 10 y te diga qué mejorar (segundo prompt).</div>
+        <div class="step">Grábate con el celular diciéndolo y compárate: ¿suena a ti o suena a robot? Ajusta las palabras que no dirías nunca.</div>
+        <div class="step">Úsalo de verdad: en una feria, con un cliente, en tus redes o en la próxima convocatoria de emprendimiento.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Crear tu pitch</div><p>Actúa como mentor de pitch para emprendedores. Mi negocio es [describe tu negocio], en [tu ciudad]. Mi cliente ideal es [quién]. El problema que resuelvo es [problema]. Escríbeme un pitch de 60 segundos en lenguaje natural y cercano, con esta estructura: problema, solución, cliente y qué me hace diferente. Que se pueda decir en voz alta sin sonar a discurso leído.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Mejorarlo como en el Demo Day</div><p>Este es mi pitch: [pega tu pitch]. Puntúalo de 1 a 10 en claridad, gancho y diferenciación. Dime las 3 mejoras más importantes y reescríbelo aplicándolas, manteniendo mi forma de hablar.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://claude.ai" target="_blank" rel="noopener">🧩 Claude <small>gratis</small></a><a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">🌐 Gemini <small>gratis</small></a><a class="tool" href="https://grok.com" target="_blank" rel="noopener">⚡ Grok <small>segunda opinión</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> dile tu pitch a 3 personas reales (no familiares) y anota qué pregunta te hizo cada una. Esas preguntas son lo que tu pitch aún no responde.</div>
+  </div>
+
+  <!-- M2 INVESTIGACION -->
+  <div class="card rv mod" id="m2">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--accent3),var(--accent))">2</div>
+      <div class="mod-title"><h2>Investigación de mercado con IA</h2><div class="sub">Sesión 1 · Perplexity + Comet</div></div>
+      <span class="badge hot">✓ 50% lo dejó montado</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="50" style="background:linear-gradient(90deg,rgba(16,185,129,.6),var(--accent3))"></div></div>
+    <div class="mod-bar-lab">67 de 135 salieron con su mini-informe de mercado con fuentes.</div>
+    <div class="blk"><h3 style="color:var(--accent3)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">Perplexity responde con fuentes y enlaces: es tu investigador. Lo que diga, lo puedes verificar.</div>
+        <div class="key">Antes de invertir un peso, valida 3 cosas: que exista demanda, quiénes son tus competidores y a qué precio venden.</div>
+        <div class="key">Comet (el navegador con IA) va más allá: abre las páginas, las resume y arma el brief por ti.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent3)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Entra a perplexity.ai (no necesitas cuenta para empezar).</div>
+        <div class="step">Usa el prompt de investigación con tu negocio y tu ciudad. Lee las fuentes, no solo el resumen.</div>
+        <div class="step">Lanza el segundo prompt para comparar a tus 3 competidores más cercanos.</div>
+        <div class="step">Copia los hallazgos en un Doc (o pídele a Claude que te lo convierta en un mini-informe en Word).</div>
+        <div class="step">Guarda ese informe: lo vas a usar en el módulo de Canvas y en NotebookLM.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent3)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Investigación de mercado (Perplexity)</div><p>Investiga el mercado de [tu negocio] en [tu ciudad] y Colombia: tamaño aproximado, principales competidores, rangos de precios y tendencias 2026. Cita todas las fuentes con enlaces. Termina con 3 oportunidades concretas para un emprendedor pequeño que está empezando.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Comparar competidores (Perplexity)</div><p>Compara estos 3 negocios: [competidor 1], [competidor 2] y [competidor 3]. Hazme una tabla con: qué venden, precios, presencia en redes, qué hacen bien y qué hacen mal según reseñas. Al final dime qué hueco del mercado están dejando libre que yo podría aprovechar con [tu negocio].</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent3)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://www.perplexity.ai" target="_blank" rel="noopener">🔎 Perplexity <small>gratis</small></a><a class="tool" href="https://www.perplexity.ai/comet" target="_blank" rel="noopener">🌀 Comet <small>navegador IA</small></a><a class="tool" href="https://claude.ai" target="_blank" rel="noopener">🧩 Claude <small>para el informe</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> investiga un producto o servicio nuevo que estés pensando lanzar. Si Perplexity no encuentra a nadie vendiéndolo en tu ciudad, acabas de encontrar o una oportunidad o una alerta. Averigua cuál de las dos.</div>
+  </div>
+
+  <!-- M3 GOOGLE -->
+  <div class="card rv mod" id="m3">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--accent2),var(--pink))">3</div>
+      <div class="mod-title"><h2>Tu ecosistema Google + Gemini</h2><div class="sub">Sesión 1 · Gemini, NotebookLM y AI Studio</div></div>
+      <span class="badge hot">✓ 47% lo dejó montado</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="47" style="background:linear-gradient(90deg,rgba(123,47,255,.6),var(--accent2))"></div></div>
+    <div class="mod-bar-lab">64 de 135 montaron su ecosistema. Era la dimensión más débil del grupo en el diagnóstico inicial, y terminó en el top 3. Bien ahí.</div>
+    <div class="blk"><h3 style="color:var(--accent2)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">Con tu cuenta de Gmail ya tienes un ecosistema de IA gratis: Gemini, NotebookLM, AI Studio, Docs y Sheets conectados.</div>
+        <div class="key">NotebookLM es tu "cerebro de documentos": le subes tus archivos y le preguntas a TUS propios documentos, no a internet.</div>
+        <div class="key">AI Studio te deja probar y configurar una IA para tu negocio sin escribir código.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent2)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Entra a gemini.google.com con tu cuenta de Gmail y fija la app en tu celular.</div>
+        <div class="step">Entra a notebooklm.google.com y crea tu primer cuaderno: súbele tu informe de mercado (módulo 2) y el Canvas (módulo 5).</div>
+        <div class="step">Pregúntale a NotebookLM cosas sobre tus propios documentos: "¿cuál es mi competidor más fuerte y por qué?"</div>
+        <div class="step">Explora aistudio.google.com: crea un prompt de sistema que convierta a Gemini en el asistente de TU negocio (mira el módulo 7).</div>
+        <div class="step">En Docs y Gmail, busca el ícono de Gemini ✦ para redactar y resumir sin salir del documento.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent2)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Tu primer cuaderno en NotebookLM</div><p>(Después de subir tus documentos a NotebookLM, pregúntale:)
+
+Con base en mis documentos: ¿cuáles son las 3 decisiones más urgentes que debo tomar en mi negocio este mes? Justifica cada una citando de qué documento sale.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Gemini como analista en Sheets</div><p>Tengo esta tabla de ventas/gastos: [pega tus datos o descríbelos]. Analízala y dime: qué producto deja más margen, qué gasto puedo recortar primero y cómo se vería mi mes si subo ventas 20%. Responde en tabla simple.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent2)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">✦ Gemini <small>gratis</small></a><a class="tool" href="https://notebooklm.google.com" target="_blank" rel="noopener">📓 NotebookLM <small>gratis</small></a><a class="tool" href="https://aistudio.google.com" target="_blank" rel="noopener">🧪 AI Studio <small>gratis</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> crea un cuaderno en NotebookLM llamado "Mi negocio" y súbele todo lo que tengas (informe, Canvas, fotos de notas, lista de precios). Desde hoy, esa es la memoria oficial de tu emprendimiento.</div>
+  </div>
+
+  <!-- M4 MARCA -->
+  <div class="card rv mod" id="m4">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--pink),var(--orange))">4</div>
+      <div class="mod-title"><h2>Marca e identidad visual</h2><div class="sub">Sesión 2 · ChatGPT (imágenes) + Claude</div></div>
+      <span class="badge hot">✓ 44% lo dejó montado</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="44" style="background:linear-gradient(90deg,rgba(236,72,153,.6),var(--pink))"></div></div>
+    <div class="mod-bar-lab">59 de 135 salieron con nombre, eslogan e imagen de marca.</div>
+    <div class="blk"><h3 style="color:var(--pink)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">Tu marca es más que el logo: es nombre + eslogan + voz (cómo hablas) + paleta de colores. Claude define la estrategia, ChatGPT dibuja.</div>
+        <div class="key">Un buen eslogan dice qué ganas tú como cliente, no qué vende el negocio.</div>
+        <div class="key">No te cases con la primera opción: genera 5, elige 2, pregunta a tus clientes cuál prefieren.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--pink)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">En Claude, usa el prompt de identidad para obtener nombres, eslogan, voz de marca y paleta.</div>
+        <div class="step">Elige tu combinación favorita y pásala al prompt de logo en ChatGPT.</div>
+        <div class="step">Pide 2 o 3 variaciones del logo (fondo claro, fondo oscuro, solo símbolo).</div>
+        <div class="step">Aplica la marca: foto de perfil de WhatsApp Business e Instagram, y plantilla de publicaciones.</div>
+        <div class="step">Guarda todo en una carpeta "Marca" en Drive: colores (códigos), logo en PNG y el texto de voz de marca.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--pink)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Identidad completa (Claude)</div><p>Actúa como director de marca. Mi negocio: [qué vendes], en [ciudad]. Mi cliente: [quién]. Quiero transmitir [cercanía / elegancia / energía / confianza]. Dame: 5 opciones de nombre (si ya tengo, mejóralo o confírmalo: [tu nombre actual]), 3 eslóganes cortos, la voz de mi marca en 3 adjetivos con ejemplo de cómo escribiría un mensaje de WhatsApp, y una paleta de 3 colores con sus códigos hex y por qué funcionan para mi cliente.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Logo (ChatGPT imágenes)</div><p>Crea un logo para "[nombre del negocio]", un negocio de [categoría] en Colombia. Estilo: [minimalista / orgánico / moderno / artesanal]. Colores principales: [tus colores]. Debe verse bien en pequeño (foto de perfil de WhatsApp) y sobre fondo blanco. Sin texto pequeño ilegible.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--pink)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://claude.ai" target="_blank" rel="noopener">🧩 Claude <small>estrategia</small></a><a class="tool" href="https://chatgpt.com" target="_blank" rel="noopener">🎨 ChatGPT <small>imágenes</small></a><a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">✦ Gemini <small>también genera imágenes</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> actualiza la foto de perfil y la descripción de tu WhatsApp Business e Instagram con tu nueva identidad. Es gratis y es el cambio que tus clientes ven primero.</div>
+  </div>
+
+  <!-- M5 CANVAS -->
+  <div class="card rv mod" id="m5">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--gold),var(--orange))">5</div>
+      <div class="mod-title"><h2>Modelo de negocio / Canvas</h2><div class="sub">Sesión 1 · Claude + Google Workspace</div></div>
+      <span class="badge warm">✓ 40% lo dejó montado</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="40" style="background:linear-gradient(90deg,rgba(245,158,11,.6),var(--gold))"></div></div>
+    <div class="mod-bar-lab">54 de 135 salieron con su Canvas en archivo. Es la base de todos los demás módulos: si no lo tienes, empieza por aquí.</div>
+    <div class="blk"><h3 style="color:var(--gold)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">El Canvas pone tu negocio completo en una sola hoja: cliente, propuesta de valor, canales, ingresos y costos.</div>
+        <div class="key">Claude no solo te explica el Canvas: te lo entrega lleno, en Word o Excel, listo para descargar y editar.</div>
+        <div class="key">El modelo de ingresos responde la pregunta clave: ¿cuántas ventas necesitas al mes para que esto valga la pena?</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--gold)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Abre Claude y usa el prompt del Canvas describiendo tu negocio con honestidad (lo que es hoy, no el sueño).</div>
+        <div class="step">Revisa cada bloque: donde diga algo que no te suene, corrígelo y pídele que lo ajuste.</div>
+        <div class="step">Pídele el archivo: "entrégamelo en Word" o "en Excel". Descárgalo.</div>
+        <div class="step">Usa el segundo prompt para el modelo de ingresos con tus números reales.</div>
+        <div class="step">Sube ambos archivos a tu cuaderno de NotebookLM (módulo 3).</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--gold)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Canvas completo (Claude)</div><p>Actúa como consultor de modelos de negocio. Mi emprendimiento: [descríbelo: qué vendes, a quién, desde cuándo, cómo vendes hoy]. Constrúyeme mi Lienzo de Modelo de Negocio (Business Model Canvas) con los 9 bloques llenos según mi caso real, en lenguaje sencillo. Señala los 2 bloques más débiles y qué haría un experto para fortalecerlos. Al final entrégamelo como documento Word listo para descargar.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Modelo de ingresos (Claude)</div><p>Con mi negocio [resumen], arma mi modelo de ingresos en Excel: precio de venta [precio], costo por unidad [costo], gastos fijos mensuales [gastos]. Calcula cuántas unidades necesito vender al mes para no perder, y muéstrame 3 escenarios: sobrevivir, vivir de esto y crecer. Explica cada fila con un comentario sencillo.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--gold)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://claude.ai" target="_blank" rel="noopener">🧩 Claude <small>entrega Word/Excel</small></a><a class="tool" href="https://notebooklm.google.com" target="_blank" rel="noopener">📓 NotebookLM <small>guárdalo ahí</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> calcula tu punto de equilibrio (las unidades que necesitas vender para no perder). Si no conoces ese número, hoy no sabes si tu negocio gana o pierde.</div>
+  </div>
+
+  <!-- M6 RUTA -->
+  <div class="card rv mod" id="m6">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--orange),var(--danger))">6</div>
+      <div class="mod-title"><h2>Tu mapa de ruta IA a 30 días</h2><div class="sub">Sesión 2 · Cierre con propósito</div></div>
+      <span class="badge cold">⟳ Solo 16% lo montó · repásalo</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="16" style="background:linear-gradient(90deg,rgba(255,140,0,.6),var(--orange))"></div></div>
+    <div class="mod-bar-lab">Solo 22 de 135 salieron con su plan. Este módulo es el que convierte el curso en resultados: sin plan, el ecosistema se olvida en dos semanas.</div>
+    <div class="blk"><h3 style="color:var(--orange)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">El mapa de ruta tiene 3 piezas: las 3 herramientas que adoptas primero, la primera automatización que montas esta semana, y un plan de 30 días.</div>
+        <div class="key">Regla de oro: una herramienta nueva por semana. Querer usarlas todas a la vez es la forma más rápida de abandonar todas.</div>
+        <div class="key">La IA queda instalada como ventaja competitiva cuando la usas en tu rutina, no cuando "la conoces".</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--orange)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Elige tus 3 herramientas: una para investigar (Perplexity), una para ejecutar (Claude o Gemini) y una para tu punto débil (¿contenido? ¿ventas? ¿finanzas?).</div>
+        <div class="step">Usa el prompt de abajo para que la IA te arme el plan de 30 días sobre tu negocio real.</div>
+        <div class="step">Pasa el plan a tu calendario: 15 minutos diarios valen más que un domingo entero al mes.</div>
+        <div class="step">Cada viernes, pregúntale a tu IA: "esta semana hice [X], ¿qué ajusto para la próxima?"</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--orange)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Tu plan de 30 días</div><p>Actúa como mi coach de adopción de IA. Mi negocio: [resumen]. Mi mayor debilidad hoy: [ventas / contenido / organización / finanzas]. Tengo [X] minutos al día. Ármame un plan de 30 días, semana a semana, para instalar la IA en mi negocio: semana 1 investigar con Perplexity, semana 2 ejecutar con Claude/Gemini, semana 3 atacar mi debilidad, semana 4 automatizar una tarea repetitiva. Cada semana con 3 acciones concretas de máximo [X] minutos y un resultado medible.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Revisión semanal (cada viernes)</div><p>Esta semana en mi plan de IA hice: [lo que hiciste]. No alcancé a: [lo pendiente]. Ajusta mi plan de la próxima semana siendo realista con mi tiempo, y dime cuál es LA acción que más impacto tendría si solo pudiera hacer una.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--orange)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://claude.ai" target="_blank" rel="noopener">🧩 Claude</a><a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">✦ Gemini</a><a class="tool" href="https://calendar.google.com" target="_blank" rel="noopener">📅 Google Calendar <small>agéndalo</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> genera tu plan de 30 días HOY (toma 5 minutos) y agenda la primera acción para mañana. El 84% del grupo no lo hizo: hacerlo ya te pone adelante.</div>
+  </div>
+
+  <!-- M7 AUTOMATIZACION -->
+  <div class="card rv mod" id="m7">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--danger),var(--pink))">7</div>
+      <div class="mod-title"><h2>Automatización sin código</h2><div class="sub">Sesión 2 · AI Studio + kit de ventas</div></div>
+      <span class="badge cold">⟳ Solo 14% lo montó · repásalo</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="14" style="background:linear-gradient(90deg,rgba(239,68,68,.55),var(--danger))"></div></div>
+    <div class="mod-bar-lab">19 de 135 lo dejaron montado. Era el tema más débil del grupo desde el diagnóstico inicial (1.5/4). Es normal: es el más nuevo. Por eso esta guía va más despacio.</div>
+    <div class="blk"><h3 style="color:var(--danger)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">Automatizar no es programar: es escribir UNA VEZ las instrucciones de una tarea repetitiva para no volver a hacerla manualmente.</div>
+        <div class="key">Tu primera automatización ideal: responder clientes por WhatsApp. Escribes el guion una vez, lo reutilizas mil veces.</div>
+        <div class="key">En Google AI Studio puedes crear un "empleado virtual" con un prompt de sistema: le explicas tu negocio y él responde como tú.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--danger)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Empieza simple: usa el prompt del kit de ventas para tener tus respuestas tipo de WhatsApp (precio, envíos, disponibilidad, objeciones).</div>
+        <div class="step">Guarda esas respuestas en WhatsApp Business: Ajustes → Herramientas para la empresa → Respuestas rápidas.</div>
+        <div class="step">Sube de nivel: entra a aistudio.google.com, crea un nuevo prompt y pega el "empleado virtual" de abajo en las instrucciones del sistema (System Instructions).</div>
+        <div class="step">Pruébalo: hazle las preguntas que te hacen tus clientes y ajusta las instrucciones hasta que responda como tú.</div>
+        <div class="step">Cuando funcione, úsalo a diario: tú pegas la pregunta del cliente, él te da la respuesta lista para enviar.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--danger)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Kit de ventas WhatsApp</div><p>Actúa como jefe de ventas de [tu negocio]. Mis productos y precios: [lista]. Mi tono: cercano y profesional. Créame mi kit de ventas para WhatsApp: 1) saludo inicial que genere confianza, 2) respuesta cuando preguntan precio (que no espante), 3) respuesta a "está muy caro", 4) respuesta a "lo voy a pensar", 5) mensaje de seguimiento a los 2 días sin ser intenso, 6) mensaje de cierre con llamado a la acción. Cortos, naturales y con emojis moderados.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Tu empleado virtual (AI Studio · System Instructions)</div><p>Eres el asistente de ventas de [nombre del negocio], un negocio de [categoría] en [ciudad]. Productos y precios: [lista]. Horarios: [horario]. Envíos: [política]. Pagos: [métodos]. Tu trabajo: responder preguntas de clientes de forma cálida, breve y vendedora, siempre cerrando con una pregunta o invitación a comprar. Si no sabes algo, di que confirmas con el dueño y pide el contacto. Nunca inventes precios ni prometas lo que no está en esta lista.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--danger)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://aistudio.google.com" target="_blank" rel="noopener">🧪 Google AI Studio <small>gratis</small></a><a class="tool" href="https://business.whatsapp.com" target="_blank" rel="noopener">💬 WhatsApp Business <small>respuestas rápidas</small></a><a class="tool" href="https://chat.z.ai" target="_blank" rel="noopener">🚀 GLM <small>piezas completas</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> monta tus 6 respuestas rápidas en WhatsApp Business. La próxima vez que un cliente pregunte el precio, responde en 10 segundos con un mensaje que vende. Esa es tu primera automatización real.</div>
+  </div>
+
+  <!-- M8 CONTENIDO -->
+  <div class="card rv mod" id="m8">
+    <div class="mod-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,var(--accent),var(--accent3))">8</div>
+      <div class="mod-title"><h2>Un mes de contenido</h2><div class="sub">Sesión 2 · Gemini + Claude</div></div>
+      <span class="badge cold">⟳ Solo 13% lo montó · repásalo</span>
+    </div>
+    <div class="mod-bar"><div class="mod-fill" data-w="13" style="background:linear-gradient(90deg,rgba(0,212,255,.5),var(--accent))"></div></div>
+    <div class="mod-bar-lab">17 de 135 salieron con su calendario. Si publicar te da pereza o no sabes qué decir, este módulo te resuelve el mes entero en una tarde.</div>
+    <div class="blk"><h3 style="color:var(--accent)">💡 Ideas clave</h3>
+      <div class="keys">
+        <div class="key">El secreto no es publicar mucho: es no tener que pensar qué publicar. El calendario decide por ti.</div>
+        <div class="key">Regla 80/20: 80% contenido que ayuda o entretiene a tu cliente, 20% venta directa.</div>
+        <div class="key">Gemini te arma el calendario con copy e idea visual; ChatGPT o Gemini te generan las imágenes.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent)">👣 Paso a paso</h3>
+      <div class="steps">
+        <div class="step">Usa el prompt del calendario en Gemini o Claude con los datos de tu negocio.</div>
+        <div class="step">Revisa las 12 publicaciones: borra las que no suenen a ti y pide reemplazos.</div>
+        <div class="step">Produce las primeras 5: genera las imágenes con ChatGPT/Gemini usando tu paleta de marca (módulo 4).</div>
+        <div class="step">Prográmalas: Meta Business Suite (gratis) deja programar Instagram y Facebook con fecha y hora.</div>
+        <div class="step">Cada fin de mes, repite el prompt contándole a la IA qué publicación funcionó mejor.</div>
+      </div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent)">📋 Prompts listos</h3>
+      <div class="prompt"><div class="plabel">Calendario de 12 publicaciones</div><p>Actúa como community manager de [tu negocio] en [ciudad]. Mi cliente: [quién]. Mi voz de marca: [tus 3 adjetivos del módulo de marca]. Créame un calendario de 12 publicaciones para un mes (3 por semana) para Instagram y Facebook. Por cada una: día sugerido, objetivo (ayudar / entretener / vender), copy listo para pegar con mi tono, idea visual descrita para generarla con IA, y 5 hashtags locales. Máximo 2 publicaciones de venta directa por semana.</p><button class="copy">Copiar</button></div>
+      <div class="prompt"><div class="plabel">Imagen de publicación (ChatGPT / Gemini)</div><p>Crea una imagen para redes sociales de [describe la idea visual del calendario]. Estilo fotográfico realista, cálido y cercano, ambientado en Colombia. Colores de mi marca: [tus colores]. Formato cuadrado. Sin texto sobre la imagen.</p><button class="copy">Copiar</button></div>
+    </div>
+    <div class="blk"><h3 style="color:var(--accent)">🧰 Herramientas</h3>
+      <div class="tools"><a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">✦ Gemini <small>calendario</small></a><a class="tool" href="https://chatgpt.com" target="_blank" rel="noopener">🎨 ChatGPT <small>imágenes</small></a><a class="tool" href="https://business.facebook.com" target="_blank" rel="noopener">📅 Meta Business Suite <small>programar gratis</small></a></div>
+    </div>
+    <div class="reto">🎯 <b>Reto de la semana:</b> genera tu calendario y deja programadas tus primeras 3 publicaciones. Un negocio que publica 3 veces por semana durante un mes ya le ganó al 90% de su competencia local.</div>
+  </div>
+
+  <!-- CIERRE -->
+  <div class="card rv center">
+    <div class="sec-title center" style="justify-content:center">🚀 ¿Y ahora qué?</div>
+    <p class="muted" style="font-size:14.5px;max-width:640px;margin:0 auto 18px">Empieza por el módulo 6 (tu plan de 30 días) y deja que él te diga el orden del resto. Recuerda la idea central del curso: <b style="color:var(--text)">no aprendiste una IA, aprendiste a dirigir un equipo de IAs.</b> Ahora dirígelo.</p>
+    <div class="share" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn" href="https://jorgeicone.github.io/evaluacion-ia-jovenes/resultados/" target="_blank" rel="noopener">📊 Ver resultados del entrenamiento</a>
+      <button class="btn ghost" id="copy-link">🔗 Copiar enlace de este material</button>
+      <button class="btn ghost" onclick="window.print()">🖨️ Imprimir / PDF</button>
+    </div>
+  </div>
+
+  <div class="foot">
+    Material de estudio · Inteligencia Artificial para Jóvenes Emprendedores<br>
+    Universidad Libre · Cúcuta · Docente: Jorge Hugo Pérez · ICONE ialabs
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* copiar prompts */
+document.querySelectorAll(".prompt .copy").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const t=b.parentElement.querySelector("p").textContent;
+    navigator.clipboard.writeText(t).then(()=>{b.textContent="✓ Copiado";setTimeout(()=>b.textContent="Copiar",1500);});
+  });
+});
+const cl=$("#copy-link");
+if(cl){cl.addEventListener("click",()=>{navigator.clipboard.writeText(location.href.split("#")[0]).then(()=>{cl.textContent="✓ Enlace copiado";setTimeout(()=>cl.textContent="🔗 Copiar enlace de este material",1600);});});}
+
+/* reveals + barras */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add("on");
+    e.target.querySelectorAll(".mod-fill").forEach(f=>{f.style.width=f.dataset.w+"%";});
+    io.unobserve(e.target);
+  });
+},{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+if(reduce){document.querySelectorAll(".mod-fill").forEach(f=>f.style.width=f.dataset.w+"%");}
+
+/* contadores hero */
+function count(el){
+  const n=+el.dataset.n;
+  if(reduce){el.textContent=n;return;}
+  const t0=performance.now(),d=1100;
+  function tick(t){const p=Math.min(1,(t-t0)/d);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+}
+document.querySelectorAll(".cnt").forEach(count);
+
+/* STARS BG */
+(function(){const cv=document.getElementById("stars");const ctx=cv.getContext("2d");let st=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight;st=[];const k=Math.min(90,innerWidth/14);for(let i=0;i<k;i++)st.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4+.3,a:Math.random(),s:Math.random()*.02+.005});}
+function loop(){ctx.clearRect(0,0,cv.width,cv.height);st.forEach(p=>{p.a+=p.s;const al=.3+Math.abs(Math.sin(p.a))*.6;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle=`rgba(0,212,255,${al*.5})`;ctx.fill();});requestAnimationFrame(loop);}
+addEventListener("resize",rs);rs();
+if(reduce){rs();ctx.clearRect(0,0,cv.width,cv.height);st.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle="rgba(0,212,255,.3)";ctx.fill();});}
+else{loop();}
+})();
+</script>
+</body>
+</html>
